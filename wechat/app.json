@@ -1,0 +1,50 @@
+{
+  "pages": [
+    "pages/addOrUpdateCard/addOrUpdateCard",
+    "pages/welcome/welcome",
+    "pages/card/card",
+    "pages/repository/repository",
+    "pages/logs/logs",
+    "pages/own-space/own-space",
+    "pages/switchcity/switchcity"
+    
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#008000",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "color": "#7A7E83",
+    "selectedColor": "#3cc51f",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/card/card",
+        "iconPath": "image/icon_component.png",
+        "selectedIconPath": "image/icon_component_HL.png",
+        "text": "微律卡"
+      },
+      {
+        "pagePath": "pages/repository/repository",
+        "iconPath": "image/icon_API.png",
+        "selectedIconPath": "image/icon_API_HL.png",
+        "text": "律师库"
+      },
+      {
+        "pagePath": "pages/own-space/own-space",
+        "iconPath": "image/icon_API.png",
+        "selectedIconPath": "image/icon_API_HL.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "connectSocket": 10000,
+    "uploadFile": 10000,
+    "downloadFile": 10000
+  }
+}

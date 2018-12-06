@@ -1,0 +1,20 @@
+<!--pages/own-space/own-space.wxml-->
+<i-panel class="cell-panel-demo" title="cell 组">
+    <i-cell-group>
+        <i-cell title="编辑资料" is-link></i-cell>
+        <i-cell title="我的收藏" is-link url="/pages/index/index"></i-cell>
+        <i-cell title="帮助说明" is-link url="/pages/index/index" only-tap-footer></i-cell>
+        <block wx:if="{{ switch1 }}">
+            <i-cell title="单行列表" label="附加描述" value="详细信息"></i-cell>
+            <i-cell title="表单">
+                <input slot="footer" type="digit" placeholder="带小数点的数字键盘"/>
+            </i-cell>
+        </block>
+        <i-cell title="开关">
+            <i-switch value="{{ switch1 }}" bind:change="onChange" slot="footer">
+                <i-icon type="right" slot="open"></i-icon>
+                <i-icon type="close" slot="close"></i-icon>
+            </i-switch>
+        </i-cell>
+    </i-cell-group>
+</i-panel>

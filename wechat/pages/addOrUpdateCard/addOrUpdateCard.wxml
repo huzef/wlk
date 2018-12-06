@@ -1,0 +1,49 @@
+<view style='background:#999;color:red;'>
+<i-panel title="基本信息">
+    <i-input value="{{ value1 }}" title="姓名" autofocus placeholder="请输入名字" />
+    <i-input value="{{ value2 }}"   title="所属律所" placeholder="请输入律所" />
+    <i-input value="{{ value2 }}" type="number"  title="执业证号" placeholder="请输入执业证号" />
+    <i-input value="{{ value2 }}" type="number"  title="联系电话" placeholder="请输入手机号" />
+    <i-input value="{{ value2 }}"   title="微信号" placeholder="请输入微信号" />
+    <i-input value="{{ value2 }}"   title="邮箱" placeholder="请输入邮箱" />
+    <button type="primary" bindtap="chooseLocation">选择位置</button>
+</i-panel>
+<i-panel title="头衔">
+<i-input value="{{ value5 }}" placeholder="多个请用逗号分割" />
+</i-panel>
+<i-panel title="形象照">
+
+          <view class="weui-cell">
+            <view class="weui-cell__bd">
+              <view class="weui-uploader">
+                <view class="weui-uploader__hd">
+                  <view class="weui-uploader__title">点击可预览选好的图片</view>
+                </view>
+                <view class="weui-uploader__bd">
+                  <view class="weui-uploader__files">
+                    <block wx:for="{{imageList}}" wx:for-item="image">
+                      <view class="weui-uploader__file">
+                        <image class="weui-uploader__img" src="{{image}}" data-src="{{image}}" bindtap="previewImage"></image>
+                      </view>
+                    </block>
+                  </view>
+                  <view class="weui-uploader__input-box">
+                    <view class="weui-uploader__input" bindtap="chooseImage"></view>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+</i-panel>
+
+<i-panel title="擅长领域">
+
+</i-panel>
+
+<i-panel title="您的简介">
+      <view class="textarea-wrp">
+        <textarea  style="height: 200px;" maxlength="1000"/>
+      </view>
+</i-panel>
+
+</view>
