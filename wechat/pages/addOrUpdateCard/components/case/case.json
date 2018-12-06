@@ -1,0 +1,6 @@
+{
+    "navigationBarTitleText": "创建名片",
+    "usingComponents": {
+      "i-panel": "../../../../dist/panel/index"
+    }
+}

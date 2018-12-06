@@ -1,0 +1,77 @@
+<view style='background:#999;font-size:12px;'>
+<form catchsubmit="formSubmit" catchreset="formReset">
+  <i-panel title="形象照">
+
+    <view class="weui-cell">
+      <view class="weui-cell__bd">
+        <view class="weui-uploader">
+          <view class="weui-uploader__hd">
+            <view class="weui-uploader__title">点击可预览选好的图片(最多三张)</view>
+          </view>
+          <view class="weui-uploader__bd">
+            <view class="weui-uploader__files">
+              <block wx:for="{{imageList}}" wx:for-item="image">
+                <view class="weui-uploader__file">
+                  <image class="weui-uploader__img" src="{{image}}" data-src="{{image}}" bindtap="previewImage"></image>
+                </view>
+              </block>
+            </view>
+            <view class="weui-uploader__input-box">
+              <view class="weui-uploader__input" bindtap="chooseImage"></view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </i-panel>
+
+  <i-panel title="擅长领域">
+    <view style="height: 100px;text-align:center;margin:10px;color:green;">
+      <view name="field">
+        <i-tag wx:for="{{field}}" wx:key="{{index}}" name="{{index}}" type="border" style="margin-right:5px;">
+          {{item}}
+        </i-tag>
+
+      </view>
+      <view style='font-size:16px;margin-top:20px;' bindtap='showDialogBtn'>
+        添加擅长领域
+        <i-icon type="add" size="24" />
+      </view>
+    </view>
+
+  </i-panel>
+
+  <i-panel title="您的简介">
+    <view class="textarea-wrp" style='margin:10px;'>
+      <textarea style="height: 200px;" name="introduce" value="{{introduce}}"  placeholder='请输入您的最多1000字的简介' maxlength="1000" />
+    </view>
+  </i-panel>
+  <i-panel class="base-class">
+    <button type='primary' formType="submit">下 一 步</button>
+  </i-panel>
+  </form>
+</view>
+
+<!--弹窗-->
+<view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
+<view class="modal-dialog" wx:if="{{showModal}}">
+  <view class="modal-title">选择擅长领域</view>
+  <view class="modal-content">
+    <checkbox-group bindchange="checkboxChange" name="checkbox1">
+      <i-row>
+        <label  wx:for="{{items}}">
+          <i-col offset='1' span="11" i-class="col-class">
+            <checkbox value="{{item.name}}" checked="{{item.checked}}" />{{item.value}}
+          </i-col>
+        </label>
+      </i-row>
+    </checkbox-group>
+    <view class="modal-input">
+      <input placeholder-class="input-holder" type="number" maxlength="10" bindinput="inputChange" class="input" placeholder="请输入数量"></input>
+    </view>
+  </view>
+  <view class="modal-footer">
+    <view class="btn-cancel" bindtap="onCancel" data-status="cancel">取消</view>
+    <view class="btn-confirm" bindtap="onConfirm" data-status="confirm">确定</view>
+  </view>
+</view>

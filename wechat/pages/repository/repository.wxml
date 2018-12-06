@@ -1,0 +1,86 @@
+<view class='search'>
+  <!-- <navigator class="location" url="../switchcity/switchcity">
+      <i-icon type="coordinates_fill" size="20" />{{county?county:location}}</navigator> -->
+  <view class='searchItem'>
+    <!-- <image src='/image/more/search.png' /> -->
+    <navigator class="location" url="../switchcity/switchcity">
+      <i-icon type="coordinates_fill" size="20" />{{county?county:location}}</navigator>
+    <i-icon type="search" size="20" />
+    <input placeholder='请输入律师'></input>
+  </view>
+</view>
+
+<!--搜索card-->
+<view class='scroll-conter'>
+  <scroll-view scroll-y>
+    <view wx:for="{{lawList}}" bindtap="getDetails" data-id='{{item.name}}' wx:key="index">
+      <i-row i-class='card-row'>
+        <i-col span="5" i-class="col-class">
+          <i-avatar i-class="col-avatar" src="https://i.loli.net/2017/08/21/599a521472424.jpg" size="large" shape="square"></i-avatar>
+        </i-col>
+        <i-col span="19" i-class="col-class">
+          <i-row>
+            <i-col span="2" i-class="col-class"  style='text-align:center;'>
+              <i-icon type="addressbook" />
+            </i-col>
+            <i-col span="22" i-class="col-class">
+              <scroll-view scroll-x style="white-space: nowrap;height:100%;">
+                {{item.name}}
+                <text class='card-text'>北京金诚同达（合肥）律师事务所</text>
+              </scroll-view>
+            </i-col>
+          </i-row>
+          <i-row>
+            <i-col span="2" i-class="col-class"  style='text-align:center;'>
+              <i-icon type="coordinates" size='20'/>
+            </i-col>
+            <i-col span="22" i-class="col-class">
+              <scroll-view scroll-x style="white-space: nowrap;height:100%;font-size:14px;line-height:25px;">
+                合肥庐阳区东怡金融广场B座婚姻家庭
+              </scroll-view>
+            </i-col>
+          </i-row>
+          <i-row>
+            <i-col span="2" i-class="col-class"  style='text-align:center;'>
+              <i-icon type="service" />
+            </i-col>
+            <i-col span="22" i-class="col-class">
+              <scroll-view scroll-x style="width: 100%;white-space: nowrap;height:100%;">
+                <i-tag color='green' style="margin-right:5px;">婚姻家庭</i-tag>
+                <i-tag color='green' style="margin-right:5px;"> 刑事辩护</i-tag>
+                <i-tag color='green' style="margin-right:5px;"> 知识产权</i-tag>
+                <i-tag color='green' style="margin-right:5px;"> 合同法</i-tag>
+                <i-tag color='green' style="margin-right:5px;"> 合同法</i-tag>
+                <i-tag color='green' style="margin-right:5px;"> 合同法</i-tag>
+              </scroll-view>
+            </i-col>
+          </i-row>
+        </i-col>
+      </i-row>
+    </view>
+  </scroll-view>
+</view>
+
+<!-- <view class='search-heard'>
+<i-row i-class="demo-row light" style="margin:1rpx;">
+  <i-col span="6" i-class="demo-col">
+    <navigator class="location" url="../switchcity/switchcity">
+      <i-icon type="coordinates_fill" size="20" />{{county?county:location}}</navigator>
+  </i-col>
+  <i-col span="16" i-class="demo-col">
+    <view class="weui-cell weui-cell_input">
+      <input type='text' class="search-input" auto-focus confirm-type='search' placeholder="输入律师" />
+    </view>
+  </i-col>
+</i-row>
+</view> -->
+<!-- 
+<i-card title="张三律师" extra="简介" thumb="https://i.loli.net/2017/08/21/599a521472424.jpg">
+    <view slot="content">内容不错</view>
+    <view slot="footer">尾部内容</view>
+</i-card>
+
+<i-card title="李四律师" extra="个人说明" thumb="https://i.loli.net/2017/08/21/599a521472424.jpg">
+    <view slot="content">内容不错</view>
+    <view slot="footer">尾部内容</view>
+</i-card>-->

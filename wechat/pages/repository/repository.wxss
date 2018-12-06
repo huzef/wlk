@@ -1,0 +1,64 @@
+/* pages/repository/repository.wxss */
+.location {
+  color: #008000;
+  text-align:center;
+  /* min-width:220rpx; */
+}
+
+view.search {
+    display: flex;
+    flex-direction: row;
+    height: 98rpx;
+    background: #f5f5f5;
+    align-items: center;
+}
+
+.searchItem {
+    display: flex;
+    width: 100%;
+    background: #fff;
+    flex-direction: row;
+    border-radius: 10rpx;
+    margin-right: 20rpx;
+    margin-left: 20rpx;
+}
+
+.searchItem image {
+    height: 42rpx;
+    width: 42rpx;
+    align-self: center;
+    margin-left: 10rpx;
+    margin-right: 20rpx;
+}
+
+.searchItem input {
+    flex: 1;
+    font-size: 30rpx;
+}
+.page-section-spacing{
+  margin-top: 60rpx;
+}
+
+.scroll-conter{
+width: 100%;
+background: #f5f5f5;
+}
+.scroll-conter scroll-view{
+  height: 500px;
+  
+}
+.card-row{
+  padding: 16rpx 36rpx 16rpx 16rpx;
+  background: white;
+  margin-bottom:5px;
+
+
+}
+.card-text{
+  color: #b6b6b6;
+  font-size: 12px;
+}
+.col-avatar{
+  width:74px!important;
+  height:74px !important;
+}

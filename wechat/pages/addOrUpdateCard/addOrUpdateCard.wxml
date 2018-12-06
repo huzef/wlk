@@ -1,0 +1,26 @@
+<view style='background:#999;color:red;'>
+ <form catchsubmit="formSubmit" catchreset="formReset">
+<i-panel title="基本信息" class="base-class">
+    <i-input value="{{ firstName }}" name="firstName" title="姓名" autofocus placeholder="请输入名字" />
+    <i-input value="{{ organization }}" name='organization'  title="所属律所" placeholder="请输入律所" />
+    <i-input value="{{ lawNum }}" type="number" name="lawNum"  title="执业证号" placeholder="请输入执业证号" />
+    <i-input value="{{ mobilePhoneNumber }}" type="number" name="mobilePhoneNumber" title="联系电话" placeholder="请输入手机号" />
+    <i-input value="{{ wechatNumber }}"   title="微信号" name="wechatNumber" placeholder="请输入微信号" />
+    <i-input value="{{ email }}"   title="邮箱" name="email" placeholder="请输入邮箱" />
+    <i-row>
+    <i-col span="20" i-class="col-class">
+    <i-input value="{{ address }}" type="textarea" name="address" title="详细地址" />
+    </i-col>
+    <i-col span="4" i-class="col-class" style="text-align:center;" bindtap="chooseLocation">
+    <i-icon type="coordinates_fill" size="34"  /></i-col>
+    </i-row>
+    <i-input title="头衔" value="{{ honor }}" name="honor" placeholder="多个请用逗号分割" />
+</i-panel>
+
+<i-panel class="base-class">
+<button  type='primary' formType="submit">下 一 步</button>
+</i-panel>
+</form>
+
+
+</view>

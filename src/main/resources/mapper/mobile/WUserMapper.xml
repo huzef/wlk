@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wlk.mobile.mapper.WUserMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.wlk.mobile.entity.WUser">
+		<id column="id" property="id" />
+	<result column="create_date" property="createDate" />
+		<result column="w_opid" property="wOpid" />
+		<result column="first_name" property="firstName" />
+		<result column="photo_file_path" property="photoFilePath" />
+		<result column="nick_name" property="nickName" />
+		<result column="mobile_phone_number" property="mobilePhoneNumber" />
+		<result column="wechat_number" property="wechatNumber" />
+		<result column="organization" property="organization" />
+		<result column="honor" property="honor" />
+		<result column="field" property="field" />
+		<result column="introduce" property="introduce" />
+		<result column="email" property="email" />
+		<result column="address" property="address" />
+		<result column="law_num" property="lawNum" />
+		<result column="is_law" property="isLaw" />
+		<result column="is_del" property="isDel" />
+		<result column="last_login_date" property="lastLoginDate" />
+	</resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+create_date AS createDate,
+        id, w_opid, first_name, photo_file_path, nick_name, mobile_phone_number, wechat_number, organization, honor, field, introduce, email, address, law_num, is_law, is_del, last_login_date
+    </sql>
+
+</mapper>

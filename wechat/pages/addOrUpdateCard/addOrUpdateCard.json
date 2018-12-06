@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "创建名片",
+  "usingComponents": {
+    "i-input": "../../dist/input/index",
+    "i-panel": "../../dist/panel/index",
+    "i-row": "../../dist/row/index",
+    "i-col": "../../dist/col/index",
+    "i-icon": "../../dist/icon/index"
+  }
+}

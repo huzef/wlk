@@ -1,0 +1,10 @@
+  <view style='background:#999;font-size:12px;'>
+  <i-panel title="您的案例">
+    <view class="textarea-wrp" style='margin:10px;'>
+      <textarea style="height: 400px;" placeholder='请输入您的所办理的案例' maxlength="-1" />
+    </view>
+  </i-panel>
+  <i-panel class="base-class">
+    <button bindtap="goCard" type='primary'>完成并进入我的名片</button>
+  </i-panel>
+  </view>

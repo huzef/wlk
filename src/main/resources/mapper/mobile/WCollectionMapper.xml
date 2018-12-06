@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wlk.mobile.mapper.WCollectionMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.wlk.mobile.entity.WCollection">
+		<id column="id" property="id" />
+	<result column="create_date" property="createDate" />
+		<result column="user_id" property="userId" />
+		<result column="collection_id" property="collectionId" />
+		<result column="is_del" property="isDel" />
+		<result column="update_date" property="updateDate" />
+	</resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+create_date AS createDate,
+        id, user_id, collection_id, is_del, update_date
+    </sql>
+
+</mapper>

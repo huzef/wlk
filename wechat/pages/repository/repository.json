@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "律师库",
+  "usingComponents": {
+    "i-icon": "../../dist/icon/index",
+    "i-avatar": "../../dist/avatar/index",
+    "i-row": "../../dist/row/index",
+    "i-col": "../../dist/col/index",
+    "i-tag": "../../dist/tag/index"
+  }
+  }
