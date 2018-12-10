@@ -108,7 +108,8 @@ public class Generator {
         strategy.setEntityLombokModel(true);
         strategy.setRestControllerStyle(true);
         strategy.setSuperControllerClass("com.wlk.core.base.BaseController");
-        strategy.setInclude("w_user","w_case","w_browse","w_collection","w_	image","w_like"/*scanner("表名")*/);
+        //strategy.setInclude("w_user","w_case","w_browse","w_collection","w_image","w_like"/*scanner("表名")*/);
+        strategy.setInclude("w_feedback");
         strategy.setSuperEntityClass("com.wlk.core.base.BaseEntity");
         strategy.setSuperEntityColumns("create_date");
         strategy.setControllerMappingHyphenStyle(true);

@@ -1,7 +1,7 @@
 #项目路径
 server:
   session: 
-    timeout: 0
+    timeout: 30
   context-path: /wlk
   tomcat: 
     uri-encoding: UTF-8
@@ -74,9 +74,9 @@ mail:
     
 #mybatis
 mybatis-plus:
-  mapper-locations: classpath:/mapper/*Mapper.xml
+  mapper-locations: classpath:/mapper/*/*Mapper.xml
   #实体扫描，多个package用逗号或者分号分隔
-  typeAliasesPackage: com.wlk.mobile.model
+  typeAliasesPackage: com.wlk.mobile.entity
   #typeEnumsPackage: com.crmforpatent.pc.model.enums
   global-config:
     #主键类型  0:"数据库ID自增", 1:"用户输入ID",2:"全局唯一ID (数字类型唯一ID)", 3:"全局唯一ID UUID";
@@ -126,6 +126,7 @@ logging:
 
 
 fdfs: 
+  web-server-url: https://wechat.innovationbaba.com/
   resHost: http://47.92.70.34  # yong
 #  resHost: http://47.92.119.145 # pan
 #  resHost: http://47.92.111.83 # 0759

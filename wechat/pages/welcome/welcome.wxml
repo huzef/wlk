@@ -7,7 +7,8 @@
     <image class="title" src="/image/more/title8.png"></image>
     <view class="content">
       <view class="hd" style="transform:rotateZ({{angle}}deg);">
-        <image class="logo" src="{{userInfo.avatarUrl}}"></image>
+        <!-- <image class="logo" src="{{userInfo.avatarUrl}}"></image> -->
+        <image class="logo" src="/image/logo.jpg"></image>
         <image class="wave" src="/image/more/wave.png" mode="aspectFill"></image>
         <image class="wave wave-bg" src="/image/more/wave.png" mode="aspectFill"></image>
       </view>
@@ -15,10 +16,11 @@
          <image class="smalltitle" src="/image/more/confirm-word1.png"></image>
        
         <view class="confirm-btn" >
-            <button wx:if="{{!hasUserInfo && canIUse}}" data-id="2" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 找 律 师 </button>
+          <button  data-id="2" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 找 律 师 </button>
+            <!-- <button wx:if="{{!hasUserInfo && canIUse}}" data-id="2" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 找 律 师 </button> -->
         </view>
         <view class="confirm-btn1" >
-          <button wx:if="{{!hasUserInfo && canIUse}}" data-id="1" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 制 名 片 </button>
+          <button  data-id="1" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 制 名 片 </button>
         </view>
         <text class="copyright">微律卡提供技术支持</text>
       </view>

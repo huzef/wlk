@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 import com.wlk.core.base.BaseEntity;
 
@@ -125,6 +126,35 @@ public class WUser extends BaseEntity {
 	/*=========================非数据库字段==========================*/
 	@TableField(exist=false)
 	private String sessionKey;
+	
+	@TableField(exist=false)
+	private String imges;
+	
+	@TableField(exist=false)
+	private List<WImage> wImages;
+	
+	@TableField(exist=false)
+	private List<WCase> Wcases;
+	
+	@TableField(exist=false)
+	private String cases;
+	
+	@TableField(exist=false)
+	private List<WUser> browse;
+	
+	@TableField(exist=false)
+	private Integer countBrowse;
+	
+	@TableField(exist=false)
+	private Integer countLike;
+	
+	@TableField(exist=false)
+	private Integer isLike;
+	
+	@TableField(exist=false)
+	private Integer isCollection;
+	
+	
 	
 
 	@Override

@@ -1,7 +1,9 @@
 /* pages/repository/repository.wxss */
 .location {
-  color: #008000;
-  text-align:center;
+  color: white;
+  background:#3cc51f;
+  opacity:1;
+ margin-left:20rpx;
   /* min-width:220rpx; */
 }
 
@@ -9,7 +11,7 @@ view.search {
     display: flex;
     flex-direction: row;
     height: 98rpx;
-    background: #f5f5f5;
+    background: #3cc51f;
     align-items: center;
 }
 
@@ -44,7 +46,7 @@ width: 100%;
 background: #f5f5f5;
 }
 .scroll-conter scroll-view{
-  height: 500px;
+  height: 600px;
   
 }
 .card-row{

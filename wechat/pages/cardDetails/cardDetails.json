@@ -1,0 +1,18 @@
+{
+  "usingComponents": {
+    "i-icon": "../../dist/icon/index",
+    "i-row": "../../dist/row/index",
+    "i-col": "../../dist/col/index",
+    "i-avatar": "../../dist/avatar/index",
+    "i-collapse": "../../dist/collapse/index",
+    "i-collapse-item": "../../dist/collapse-item/index",
+    "i-tabs": "../../dist/tabs/index",
+    "i-tab": "../../dist/tab/index",
+    "i-panel": "../../dist/panel/index",
+    "i-tag": "../../dist/tag/index",
+    "i-spin": "../../dist/spin/index"
+  },
+  "navigationBarTitleText": "名片",
+  "enablePullDownRefresh": false,
+  "disableScroll": true
+}

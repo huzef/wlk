@@ -7,7 +7,7 @@ package com.wlk.core.enums;
  * 
  */
 public enum HttpCode {
-	OK("请求成功",200),
+	OK("",200),
 	MULTI_STATUS("频繁操作",201),
 	NAME_PWD_ERROR("用户名或密码不正确",202),
 	NAME_DISABLED("用户被禁用,请联系管理员！",203),

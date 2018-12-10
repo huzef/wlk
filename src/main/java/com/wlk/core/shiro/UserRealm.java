@@ -25,13 +25,21 @@ import java.util.List;
 import java.util.Map;
 
 import com.alibaba.fastjson.JSONObject;
-
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.wlk.core.base.BaseController;
+import com.wlk.core.enums.LoginType;
+import com.wlk.core.support.tokeManager.TokenManager;
+import com.wlk.mobile.entity.WUser;
+import com.wlk.mobile.service.IWUserService;
 
 public class UserRealm  extends AuthorizingRealm {
 	final static Logger logger = LoggerFactory.getLogger(AuthorizingRealm.class);
-	
-
+    @Override
+    public String getName() {
+        return LoginType.USER.toString();
+    }
+	@Autowired
+	IWUserService userService;
 	 /**
      * 验证当前登录的Subject
      * WebLoginController.login()方法中执行Subject.login()时 执行此方法
@@ -39,42 +47,26 @@ public class UserRealm  extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
     	UsernamePasswordToken upToken = (UsernamePasswordToken) token;
-		logger.info("管理者登录==============》"+upToken.getUsername());
+		logger.info("微信用户登录==============》"+upToken.getUsername());
 		String username = upToken.getUsername();
-		Map<String, Object> map=new HashMap<>();
-		map.put("nickname", username);
+		QueryWrapper<WUser> qw=new QueryWrapper<WUser>();
+		qw.eq("w_opid", username);
 		// 密码. 
 		Object credentials = null;
-		// 盐值
-		ByteSource credentialsSalt=null;
-
+		List<WUser> u=userService.list(qw);
+		if(u.size()>0){
+			credentials="7e779a6cdf8c9e3084633f81c8d3f2fe";
+			TokenManager.setValSession(u.get(0).getWOpid(), u.get(0));
+		}
+		
 		Object principal = username;
 		//realmName: 当前 realm 对象的 name. 调用父类的 getName() 方法即可
 		String realmName = getName();
+		
 		SimpleAuthenticationInfo info = null; //new SimpleAuthenticationInfo(principal, credentials, realmName);
-		info = new SimpleAuthenticationInfo(principal, credentials, credentialsSalt, realmName);
+		info = new SimpleAuthenticationInfo(principal, credentials,ByteSource.Util.bytes("h1z1f10"),realmName);
 		return info;	
-    	/*String loginName = (String) token.getPrincipal();
-        // 获取用户密码
-        String password = new String((char[]) token.getCredentials());
-        UUser user = userService.selectOne(new EntityWrapper<UUser>()
-        		.eq("nickname", loginName).eq("pswd", password));
-        if (user == null) {
-            //没找到帐号
-            throw new UnknownAccountException();
-        }
-        //交给AuthenticatingRealm使用CredentialsMatcher进行密码匹配，如果觉得人家的不好可以自定义实现
-        SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
-                user.getNickname(),
-                user.getPswd(),
-                //ByteSource.Util.bytes("salt"), salt=username+salt,采用明文访问时，不需要此句
-                getName()
-        );
-        //session中不需要保存密码
-        user.setPswd("");
-        //将用户信息放入session中
-        SecurityUtils.getSubject().getSession().setAttribute("crmforpatent", user);
-        return authenticationInfo;*/
+    	
     }
 
 	@Override  					

@@ -1,11 +1,13 @@
 // pages/own-space/own-space.js
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    switch1: true
+    switch1: true,
+    userInfo:{} 
   },
   onChange(event) {
     const detail = event.detail;
@@ -19,7 +21,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+  this.setData({
+    userInfo: wx.getStorageSync('loginUser')
+  })
   },
 
   /**

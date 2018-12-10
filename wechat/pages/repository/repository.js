@@ -9,76 +9,34 @@ Page({
   data: {
     location: appInstance.globalData.defaultCity,
     county: appInstance.globalData.defaultCounty,
-    lawList: [{
-      "name": "张三",
-      "hardImg": "https://i.loli.net/2017/08/21/599a521472424.jpg",
-      "company": "深圳市哦哦律师事务所",
-      "adreess": "深圳市南山区南山大道与创业路交汇处亿利达大厦1栋518",
-      "service": "债务债权,经济纠纷,婚姻家庭",
-    },
-    {
-      "name": "李四",
-      "hardImg": "https://i.loli.net/2017/08/21/599a521472424.jpg",
-      "company": "深圳市哦哦律师事务所",
-      "adreess": "深圳市南山区南山大道与创业路交汇处亿利达大厦1栋518",
-      "service": "债务债权,经济纠纷,婚姻家庭",
-    },
-    {
-      "name": "王五",
-      "hardImg": "https://i.loli.net/2017/08/21/599a521472424.jpg",
-      "company": "深圳市哦哦律师事务所",
-      "adreess": "深圳市南山区南山大道与创业路交汇处亿利达大厦1栋518",
-      "service": "债务债权,经济纠纷,婚姻家庭",
-    },
-    {
-      "name": "赵六",
-      "hardImg": "https://i.loli.net/2017/08/21/599a521472424.jpg",
-      "company": "深圳市哦哦律师事务所",
-      "adreess": "深圳市南山区南山大道与创业路交汇处亿利达大厦1栋518",
-      "service": "债务债权,经济纠纷,婚姻家庭",
-    },
-    {
-      "name": "张三",
-      "hardImg": "https://i.loli.net/2017/08/21/599a521472424.jpg",
-      "company": "深圳市哦哦律师事务所",
-      "adreess": "深圳市南山区南山大道与创业路交汇处亿利达大厦1栋518",
-      "service": "债务债权,经济纠纷,婚姻家庭",
-      }, ,
-      {
-        "name": "王五",
-        "hardImg": "https://i.loli.net/2017/08/21/599a521472424.jpg",
-        "company": "深圳市哦哦律师事务所",
-        "adreess": "深圳市南山区南山大道与创业路交汇处亿利达大厦1栋518",
-        "service": "债务债权,经济纠纷,婚姻家庭",
-      },
-      {
-        "name": "赵六",
-        "hardImg": "https://i.loli.net/2017/08/21/599a521472424.jpg",
-        "company": "深圳市哦哦律师事务所",
-        "adreess": "深圳市南山区南山大道与创业路交汇处亿利达大厦1栋518",
-        "service": "债务债权,经济纠纷,婚姻家庭",
-      },
-      {
-        "name": "张三",
-        "hardImg": "https://i.loli.net/2017/08/21/599a521472424.jpg",
-        "company": "深圳市哦哦律师事务所",
-        "adreess": "深圳市南山区南山大道与创业路交汇处亿利达大厦1栋518",
-        "service": "债务债权,经济纠纷,婚姻家庭",
-      },
-    ]
+    law:"",
+    lawList: [],
+    spinShow: true,
+    isSearch:false,
+    loading:false,
+    more:false,
+    moreBottom:false,
+    void1:false,
+    pageNum:1,
+    isDetails:true
   },
   getDetails:function(data){
-console.log(data)
-    console.log(data.currentTarget.dataset.id)
-    wx.switchTab({
-      url: '/pages/card/card'
+    this.setData({ isDetails: false })
+    const id = data.currentTarget.dataset.id
+    wx.navigateTo({
+      url: `/pages/cardDetails/cardDetails?id=${id}`
     })
+    
+  },
+  setDetails:function(){
+    this.setData({ isDetails: true })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     this.getLocation();
+    
   },
 
   /**
@@ -91,25 +49,35 @@ console.log(data)
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function (e) {
+    if (this.data.isDetails){
+      if (appInstance.globalData.selectCity){
+        this.setData({
+          location: appInstance.globalData.defaultCity,
+          county: appInstance.globalData.defaultCounty,
+        })
+
+      }
     this.setData({
-      location: appInstance.globalData.defaultCity,
-      county: appInstance.globalData.defaultCounty
+      pageNum: 1,
+      lawList: [],
     })
+    this.search()
+    }
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+      
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    
   },
 
   /**
@@ -123,7 +91,17 @@ console.log(data)
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+   
+    if (!this.data.moreBottom){
+      this.setData({
+        pageNum: ++this.data.pageNum,
+        loading:true,
+        isDetails: true
+      })
+      this.search()
+    }
+   
+    console.log("最底了=====")
   },
 
   /**
@@ -151,12 +129,78 @@ console.log(data)
             // console.log(res.data.result.ad_info.city+res.data.result.ad_info.adcode);
             that.setData({
               location: res.data.result.ad_info.city,
-              county: res.data.result.ad_info.district
+              county: res.data.result.ad_info.district,
+              isSearch:true
             })
+            that.search();
             // that.selectCounty();
+          },
+          fail: res => {
+            console.log("获取位置失败")
           }
         })
+      },
+      fail: res => {
+        console.log("获取位置失败77")         
+        that.setData({
+          isSearch: true,
+          location: appInstance.globalData.defaultCity,
+          county: appInstance.globalData.defaultCounty,
+        })
+        that.search();
+      }
+     
+    })
+    
+  },
+  search1:function(e){
+    this.setData({
+      pageNum:1,
+      lawList:[],
+      law: e.detail.value,
+      isDetails: true
+    })
+    this.search(e)
+  },
+  search:function(e){
+    if (!this.data.isSearch){
+      return false;
+    }
+    const data = { address: this.data.county ? this.data.county : this.data.location }
+    data.firstName = e!=undefined?e.detail.value:this.data.law;
+    data.pageNum = this.data.pageNum
+    var that = this;
+    wx.request({
+      url: appInstance.globalData.baseService + "user/search",
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded", 'Cookie': wx.getStorageSync("cookie")
+      },
+      method: "POST",
+      data: data,
+      //data: { code: code},
+      complete: function (res) {
+        if(res.data.code==200){
+          let list = []
+          if (res.data.data.records.length == 0) {
+            list = res.data.data.records
+          } else {
+            list = that.data.lawList.concat(res.data.data.records)
+          }
+          const lgth = res.data.data.records.length;
+          that.setData({
+            lawList: list,
+            spinShow: false,
+            moreBottom: (lgth < 10 ? true : false),
+              more: ((lgth < 10 && lgth>0)? true : false),
+            void1: (lgth == 0 ? true : false),
+            loading: false
+          })
+        }else{
+          appInstance.loginCode()
+        }
+
+
       }
     })
-  },
+  }
 })

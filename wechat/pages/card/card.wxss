@@ -143,13 +143,13 @@ page{
  text-align: center;
 }
 .card-location{
-  color:green;
+  color:3cc51f;
   border-bottom:1px solid;
 
 }
 .collapse-item-title{
 font-size:16px;
-color:green;
+color:#3cc51f;
 font-weight:600;
 
 }
@@ -164,4 +164,7 @@ width:100%;
 background-color:#ccc;
 overflow:hidden;
 
+ }
+ .z-class{
+   z-index: 99 !important;
  }

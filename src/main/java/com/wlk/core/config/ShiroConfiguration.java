@@ -17,6 +17,7 @@ import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,6 +27,7 @@ import com.wlk.core.shiro.AjaxPermissionsAuthorizationFilter;
 import com.wlk.core.shiro.CustomizedModularRealmAuthenticator;
 import com.wlk.core.shiro.RetryLimitHashedCredentialsMatcher;
 import com.wlk.core.shiro.UserRealm;
+import com.wlk.core.shiro.WebRealm;
 
 
 
@@ -69,10 +71,11 @@ public class ShiroConfiguration {
         
         filterChainDefinitionMap.put("/static/**", "anon");
         filterChainDefinitionMap.put("/case/list", "anon");
-
+        filterChainDefinitionMap.put("/login", "anon");
         filterChainDefinitionMap.put("/error", "anon");
         //filterChainDefinitionMap.put("/uPermission/add", "roles[user]");
-        filterChainDefinitionMap.put("/**", "anon");
+        //filterChainDefinitionMap.put("/**", "anon");
+        filterChainDefinitionMap.put("/**", "authc");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;
     }
@@ -83,11 +86,12 @@ public class ShiroConfiguration {
     @Bean
     public DefaultWebSecurityManager securityManager() {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
+       // securityManager.setSessionManager(new DefaultWebSessionManager());
         securityManager.setAuthenticator(modularRealmAuthenticator());
-        List<Realm> realms=new ArrayList<>();
+        /*List<Realm> realms=new ArrayList<>();
         realms.add(userRealm());
-        securityManager.setRealms(realms);
-        //securityManager.setRealm(userRealm());
+        securityManager.setRealms(realms);*/
+        securityManager.setRealm(userRealm());
         
         securityManager.setCacheManager(ehCacheManager());
         return securityManager;
@@ -97,8 +101,8 @@ public class ShiroConfiguration {
      * */
     @Bean
     public ModularRealmAuthenticator modularRealmAuthenticator(){
-        //ModularRealmAuthenticator modularRealmAuthenticator=new ModularRealmAuthenticator();
-        CustomizedModularRealmAuthenticator modularRealmAuthenticator=new CustomizedModularRealmAuthenticator();
+        ModularRealmAuthenticator modularRealmAuthenticator=new ModularRealmAuthenticator();
+        //CustomizedModularRealmAuthenticator modularRealmAuthenticator=new CustomizedModularRealmAuthenticator();
         modularRealmAuthenticator.setAuthenticationStrategy(new AtLeastOneSuccessfulStrategy());
         return modularRealmAuthenticator;
     }

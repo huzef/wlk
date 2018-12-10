@@ -1,0 +1,16 @@
+  <view style='background:#999;font-size:12px;'>
+  <form catchsubmit="formSubmit" catchreset="formReset">
+  <i-panel title="您的案例">
+    <view class="textarea-wrp" style='margin:10px;'>
+      <textarea style="height: 400px;"  name="cases" value="{{cases}}"  placeholder='请输入您的所办理的案例' maxlength="-1" />
+    </view>
+  </i-panel>
+  <i-panel  hide-border>
+<button  type='primary' formType="submit" style='margin:28rpx;12rpx'> 制 作 完 成 </button>
+</i-panel>
+
+  </form>
+  </view>
+
+
+  <i-toast id="toast" />

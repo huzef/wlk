@@ -5,6 +5,8 @@
     "i-avatar": "../../dist/avatar/index",
     "i-row": "../../dist/row/index",
     "i-col": "../../dist/col/index",
-    "i-tag": "../../dist/tag/index"
+    "i-tag": "../../dist/tag/index",
+    "i-spin": "../../dist/spin/index",
+    "i-load-more": "../../dist/load-more/index"
   }
   }

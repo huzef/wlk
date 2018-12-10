@@ -29,5 +29,13 @@
 create_date AS createDate,
         id, w_opid, first_name, photo_file_path, nick_name, mobile_phone_number, wechat_number, organization, honor, field, introduce, email, address, law_num, is_law, is_del, last_login_date
     </sql>
+    
+    <select id="queryBrowseForThree" resultType="java.lang.Integer" resultMap="BaseResultMap">
+    SELECT b.* from w_browse a,w_user b where a.browse_id=b.id and a.user_id=#{id}  ORDER BY a.create_date desc limit 3
+    </select>
+    <select id="queryCollectionList"  resultMap="BaseResultMap">
+    	SELECT a.* from w_user a ,w_collection b where a.id=b.user_id and b.collection_id=#{id} ORDER BY b.create_date desc
+    </select>
+    
 
 </mapper>

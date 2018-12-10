@@ -1,0 +1,217 @@
+<view class="container">
+  <movable-area>
+    <movable-view direction="vertical" style="z-index: 12;height: 40px; width: 90px; background: #000;opacity:0.5;border-top-left-radius:12rpx;border-bottom-left-radius:12rpx;color:white;text-align:center;" x="600" y="400">
+      <view style='line-height:40px;font-size:14px;' bindtap='gotoCard'>
+        <i-icon type="businesscard" size='24' /> 我的名片</view>
+    </movable-view>
+
+    <scroll-view scroll-y>
+
+      <block>
+
+        <view class='title'>
+          <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" style='height:240px;'>
+            <!-- <swiper-item>  
+    <video id="myVideo" style='width:100%;' src="https://jdvod.300hu.com/4c1f7a6atransbjngwcloud1oss/b7366ae90468176186839041/v.f30.mp4?dockingId=45a21ae4-9315-4743-9b0f-d85cd1951aa6&storageSource=3" 
+></video>
+      </swiper-item>  -->
+            <swiper-item wx:if="{{user.wimages.length==0}}">
+            <image src='/image/head.png'></image>
+            </swiper-item>
+            <block wx:for="{{user.wimages}}" wx:key="index">
+              <swiper-item>
+                <view style='background:red;'></view>
+                <image src="{{item.path}}" style='width:100%;' />
+              </swiper-item>
+            </block>
+
+
+          </swiper>
+        </view>
+
+        <view class="content">
+          <view class="hd" style="transform:rotateZ({{angle}}deg);">
+            <!-- <image class="logo" src="{{userInfo.avatarUrl}}"></image> -->
+            <image class="wave" src="/image/more/wave.png" mode="aspectFill"></image>
+            <image class="wave wave-bg" src="/image/more/wave.png" mode="aspectFill"></image>
+          </view>
+          <view class="bd">
+            <label class='card-text'>{{user.firstName}}
+              <text style='font-size:10px;'>({{user.lawNum}})</text>
+            </label>
+
+            <view class='card-adress'>{{user.organization}}
+              <label class='card-location' bindtap="getLocation"> 查看位置
+                <i-icon type="browse" color='#3cc51f' size='20' />
+              </label>
+            </view>
+
+
+            <view style='text-align: center;margin:10px;'>
+              <i-row>
+                <i-col span="8" i-class="col-class">
+                  <button class="mini-btn" type="primary" size="mini" bindtap="makePhoneCall">电话咨询</button>
+                </i-col>
+                <i-col span="8" i-class="col-class">
+                  <button class="mini-btn" type="primary" bindtap='copy' size="mini">加微信</button>
+                </i-col>
+                <i-col span="8" i-class="col-class">
+                  <button class="mini-btn" type="primary" open-type="share" size="mini">分享</button>
+                </i-col>
+              </i-row>
+            </view>
+
+
+            <view style='text-align: center;margin:10px;font-size:14px;'>
+              <i-row>
+                <i-col span="8" i-class="col-class">
+                  <view>
+                    <i-avatar wx:for="{{user.browse}}" wx:key="{{index}}" src="{{item.photoFilePath}}" size="small" style="margin-right: -5px;"></i-avatar>
+                  </view>
+                  <view style='margin-top:6rpx'>
+                    访 客 <text style='color:#3cc51f;'>{{user.countBrowse}}</text>
+                  </view>
+                </i-col>
+                <i-col span="8" i-class="col-class" bindtap="isLike">
+                  <view >
+                    <i-icon wx:if="{{user.isLike>0||isLike>0}}" type="like_fill" size='24' color='#3cc51f'/>
+                    <i-icon wx:else type="like" size='24' color='#3cc51f'/>
+                  </view>
+                  <view  style='margin-top:6rpx'>
+                    点 赞 <text style='color:#3cc51f;'>{{user.countLike}}</text>
+                  </view>
+                </i-col>
+                <i-col span="8" i-class="col-class" bindtap="isCollection">
+                  <view>
+                    <i-icon wx:if="{{user.isCollection>0||isCollection>0}}" type="collection_fill" size='24' color='#3cc51f'/>
+                    <i-icon wx:else type="collection" size='24' color='#3cc51f'/>
+                  </view>
+                  <view  style='margin-top:6rpx'>
+                    收 藏
+                  </view>
+                </i-col>
+              </i-row>
+            </view>
+
+            <view class="caption-wrap" style="background:white;margin:8px 0 4px;">
+              <i-collapse name="{{name}}" style="text-align:center;">
+                <i-collapse-item name="name1" title="详 情 信 息" i-class-title="collapse-item-title" i-class-content="">
+                  <view slot="content" style='text-align:left'>
+                    <i-row style="padding:8px;">
+                      <i-col span="4" i-class="col-class">电话:</i-col>
+                      <i-col span="16" i-class="col-class">{{user.mobilePhoneNumber}} </i-col>
+                    </i-row>
+                    <i-row style="padding:8px;">
+                      <i-col span="4" i-class="col-class">微信:</i-col>
+                      <i-col span="16" i-class="col-class">{{user.wechatNumber}} </i-col>
+                    </i-row>
+                    <i-row style="padding:8px;">
+                      <i-col span="4" i-class="col-class">邮箱:</i-col>
+                      <i-col span="16" i-class="col-class">{{user.email}}</i-col>
+                    </i-row>
+                    <i-row style="padding:8px;">
+                      <i-col span="4" i-class="col-class">地址:</i-col>
+                      <i-col span="20" i-class="col-class">{{user.address}} </i-col>
+                    </i-row>
+                    <i-row style="text-align:center;">
+                    <button type="primary" plain="true" size="mini" bindtap="addContact">保存为联系人</button>                     
+                    </i-row>
+                    <!--<i-input value="130288999765" title="微   信" disabled />
+            <i-input type='textarea' value="深圳市 南山区 沿山路22号 火炬大厦 2层203室" title="地址" disabled /> -->
+                  </view>
+                </i-collapse-item>
+
+              </i-collapse>
+            </view>
+
+
+            <i-tabs current="{{ current }}" color="#3cc51f" bindchange="handleChange" style="font-size:16px;">
+              <i-tab key="1" title="简 介" type="activity">
+              </i-tab>
+              <i-tab key="2" title="案 例">
+              </i-tab>
+            </i-tabs>
+            <view wx:if="{{tab1}}" class='tab1'>
+              <i-panel>
+              <view style="padding: 15px;">
+                <i-row>
+                  <i-col span="3" i-class="col-class" style='text-align:right'>
+                    <i-icon type="integral" size="28" color="#3cc51f" /> </i-col>
+                  <i-col span="20" i-class="col-class jjtitle"> 头 衔 </i-col>
+                </i-row>
+                <i-row>
+                  <i-col span="20" i-class="col-class" offset='3'>
+                    <i-panel hide-border>
+                      <view style="padding: 5px;min-height:100px;">
+                      {{user.honor}}
+                      </view>
+                      
+                    </i-panel>
+                  </i-col>
+                </i-row>
+              </view>
+            </i-panel>
+              <i-panel>
+                <view style="padding: 15px;">
+                  <i-row>
+                    <i-col span="3" i-class="col-class" style='text-align:right'>
+                      <i-icon type="service" size="28" color="#3cc51f" /> </i-col>
+                    <i-col span="20" i-class="col-class jjtitle"> 擅 长 领 域 </i-col>
+                  </i-row>
+                  <i-row>
+                    <i-col span="20" i-class="col-class" offset='3'>
+                      <i-panel hide-border>
+                        <view style="padding: 5px;min-height:100px;">
+                          <i-tag wx:for="{{field}}" wx:key="{{index}}" name="{{index}}" color="blue"  type="border" style="margin-right:5px;">
+                            {{item}}
+                          </i-tag>
+                        </view>
+
+                      </i-panel>
+
+                    </i-col>
+                  </i-row>
+                </view>
+              </i-panel>
+              <i-panel>
+                <view style="padding: 15px;">
+                  <i-row>
+                    <i-col span="3" i-class="col-class" style='text-align:right'>
+                      <i-icon type="addressbook" size="28" color="#3cc51f" /> </i-col>
+                    <i-col span="20" i-class="col-class jjtitle"> 个 人 简 介 </i-col>
+                  </i-row>
+                  <i-row>
+                    <i-col span="20" i-class="col-class" offset='3'>
+                      <i-panel hide-border>
+                        <view style="padding: 5px;min-height:100px;">
+                          {{user.introduce?user.introduce:""}}
+                        </view>
+
+                      </i-panel>
+                    </i-col>
+                  </i-row>
+                </view>
+              </i-panel>
+
+
+            </view>
+            <view wx:if="{{tab2}}" class='tab2'>
+              <i-panel>
+                <view style="padding: 15px;">
+                  {{user.wcases[0].content}}
+                </view>
+              </i-panel>
+            </view>
+
+            <!-- <text class="copyright">微律卡提供技术支持</text> -->
+          </view>
+        </view>
+
+      </block>
+
+    </scroll-view>
+  </movable-area>
+<i-spin size="large" i-class="z-class" fix wx:if="{{ spinShow }}"></i-spin>
+</view>
+
+

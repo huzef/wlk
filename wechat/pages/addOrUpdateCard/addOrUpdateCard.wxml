@@ -1,49 +1,28 @@
-<view style='background:#999;color:red;'>
-<i-panel title="基本信息">
-    <i-input value="{{ value1 }}" title="姓名" autofocus placeholder="请输入名字" />
-    <i-input value="{{ value2 }}"   title="所属律所" placeholder="请输入律所" />
-    <i-input value="{{ value2 }}" type="number"  title="执业证号" placeholder="请输入执业证号" />
-    <i-input value="{{ value2 }}" type="number"  title="联系电话" placeholder="请输入手机号" />
-    <i-input value="{{ value2 }}"   title="微信号" placeholder="请输入微信号" />
-    <i-input value="{{ value2 }}"   title="邮箱" placeholder="请输入邮箱" />
-    <button type="primary" bindtap="chooseLocation">选择位置</button>
-</i-panel>
-<i-panel title="头衔">
-<i-input value="{{ value5 }}" placeholder="多个请用逗号分割" />
-</i-panel>
-<i-panel title="形象照">
-
-          <view class="weui-cell">
-            <view class="weui-cell__bd">
-              <view class="weui-uploader">
-                <view class="weui-uploader__hd">
-                  <view class="weui-uploader__title">点击可预览选好的图片</view>
-                </view>
-                <view class="weui-uploader__bd">
-                  <view class="weui-uploader__files">
-                    <block wx:for="{{imageList}}" wx:for-item="image">
-                      <view class="weui-uploader__file">
-                        <image class="weui-uploader__img" src="{{image}}" data-src="{{image}}" bindtap="previewImage"></image>
-                      </view>
-                    </block>
-                  </view>
-                  <view class="weui-uploader__input-box">
-                    <view class="weui-uploader__input" bindtap="chooseImage"></view>
-                  </view>
-                </view>
-              </view>
-            </view>
-          </view>
+<view style='background:#999;'>
+ <form catchsubmit="formSubmit" catchreset="formReset">
+<i-panel title="基本信息" class="base-class">
+    <i-input value="{{ user.firstName }}" name="firstName" title="姓名" autofocus placeholder="请输入名字" />
+    <i-input value="{{ user.organization }}" name='organization'  title="所属律所" placeholder="请输入律所" />
+    <i-input value="{{ user.lawNum }}" type="number" name="lawNum"  title="执业证号" placeholder="请输入执业证号" />
+    <i-input value="{{ user.mobilePhoneNumber }}" type="number" name="mobilePhoneNumber" title="联系电话" placeholder="请输入手机号" />
+    <i-input value="{{ user.wechatNumber }}"   title="微信号" name="wechatNumber" placeholder="请输入微信号" />
+    <i-input value="{{ user.email }}"   title="邮箱" name="email" placeholder="请输入邮箱" />
+    <i-row>
+    <i-col span="20" i-class="col-class">
+    <i-input value="{{ address }}" type="textarea" name="address" disabled placeholder="请确保能获取您的位置权限"   title="地址" />
+    </i-col>
+    <i-col span="4" i-class="col-class" style="text-align:center;" bindtap="chooseLocation">
+    <i-icon type="coordinates_fill" size="34" color='#3cc51f' /></i-col>
+    </i-row>
+    <i-input title="头衔" value="{{ user.honor }}" name="honor" placeholder='例如 "合伙人,实习律师"' />
 </i-panel>
 
-<i-panel title="擅长领域">
-
+<i-panel class="base-class" hide-border>
+<button  type='primary' formType="submit" style='margin:28rpx;12rpx'>下 一 步</button>
+<button style='margin:28rpx;12rpx' bindtap='nextTime'>先 看 看</button>
 </i-panel>
-
-<i-panel title="您的简介">
-      <view class="textarea-wrp">
-        <textarea  style="height: 200px;" maxlength="1000"/>
-      </view>
-</i-panel>
+</form>
 
 </view>
+
+<i-toast id="toast" />

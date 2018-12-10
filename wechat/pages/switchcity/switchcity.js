@@ -135,6 +135,7 @@ Page({
   bindCounty: function(e) {
     console.log(e);
     this.setData({ county: e.currentTarget.dataset.city })
+    appInstance.globalData.selectCity=true;
     appInstance.globalData.defaultCounty = this.data.county
     console.log(appInstance.globalData.defaultCounty);
 

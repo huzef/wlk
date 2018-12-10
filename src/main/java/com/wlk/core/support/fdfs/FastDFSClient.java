@@ -153,7 +153,8 @@ public class FastDFSClient {
 	 * @return
 	 */
 	public String getResAccessUrl(StorePath storePath) {
-		String fileUrl = fdfsConfig.getResHost() + ":" + fdfsConfig.getStoragePort() + "/" + storePath.getFullPath();
+		String fileUrl =fdfsConfig.getWebServerUrl() + storePath.getFullPath();
+		//String fileUrl = fdfsConfig.getResHost() + ":" + fdfsConfig.getStoragePort() + "/" + storePath.getFullPath();
 		return fileUrl;
 	}
 

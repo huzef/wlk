@@ -1,11 +1,18 @@
 package com.wlk.mobile.controller;
 
 
+import java.util.Date;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import com.wlk.core.util.json.Json;
+import com.wlk.mobile.entity.WBrowse;
+import com.wlk.mobile.service.IWBrowseService;
 import com.wlk.core.base.BaseController;
+import com.wlk.core.support.tokeManager.TokenManager;
+
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 /**
@@ -21,7 +28,8 @@ import io.swagger.annotations.ApiOperation;
 @RequestMapping("/browse")
 public class WBrowseController extends BaseController {
 
-
+	@Autowired
+	IWBrowseService browseService;
 	/**
 	 * 浏览记录查询
 	 * @author hzf
@@ -68,7 +76,10 @@ public class WBrowseController extends BaseController {
 	 */
 	@ApiOperation(value = "浏览记录添加", notes = "浏览记录添加")
 	@RequestMapping(value="add",method=RequestMethod.POST)
-	public Json add(){
+	public Json add(WBrowse browse){
+		browse.setBrowseId(TokenManager.getToken().getId());
+		browse.setCreateDate(new Date());
+		browseService.save(browse);
 		return ajaxJson();
 	}
 	

@@ -1,6 +1,11 @@
 package com.wlk.mobile.service;
 
+import com.wlk.mobile.entity.WCollection;
 import com.wlk.mobile.entity.WUser;
+
+import java.util.List;
+
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -13,4 +18,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IWUserService extends IService<WUser> {
 	
+	
+	List<WUser> queryBrowseForThree(Integer id);
+
+	Page<WUser> queryCollectionList(Page<WCollection> page, Integer collectionId);
 }

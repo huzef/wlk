@@ -38,11 +38,12 @@ Page({
       // 在没有 open-type=getUserInfo 版本的兼容处理
       wx.getUserInfo({
         success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
+          this.getUserInfo();
+          // app.globalData.userInfo = res.userInfo
+          // this.setData({
+          //   userInfo: res.userInfo,
+          //   hasUserInfo: true
+          // })
         }
       })
     }
@@ -92,15 +93,21 @@ Page({
     });
   },
   getUserInfo: function (e) {
-    console.log(e)
+    if (e.detail.errMsg.includes("fail auth deny")){
+      wx.showModal({
+        title: '温馨提示',
+        content: '为了能让你有更好的体验，需您同意授权登录！',
+        showCancel: false,
+        confirmText: '确定'
+      })
+      return false;
+    }
     if (e.currentTarget.dataset.id==1){
       this.goToIndex()
     }else{
       this.goToRepository()
     }
-    console.log(e.detail.userInfo)
     const data={};
-    data.id= app.globalData.userInfo.id; 
     data.nickName = e.detail.userInfo.nickName;
     data.photoFilePath = e.detail.userInfo.avatarUrl;
     data.gender = e.detail.userInfo.gender;
@@ -109,15 +116,21 @@ Page({
     wx.request({
       url: app.globalData.baseService + "user/update",
       header: {
-        "Content-Type": "application/x-www-form-urlencoded"
+        "Content-Type": "application/x-www-form-urlencoded",
+        'cookie': wx.getStorageSync("cookie")
       },
       method: "POST",
       data: data,
       //data: { code: code},
       complete: function (res) {
-        console.log(res)
-        that.globalData.userInfo = res.data.data
-        console.log(that.globalData.userInfo);
+        if (res.data.code==200){
+        app.globalData.userInfo = res.data.data
+        wx.setStorageSync('loginUser', res.data.data);
+        console.log(app.globalData.userInfo);
+      }else{
+          app.loginCode()
+      }
+
 
       }
     })

@@ -1,0 +1,25 @@
+/* pages/collect/collect.wxss */
+
+.scroll-conter{
+width: 100%;
+background: #f5f5f5;
+}
+.scroll-conter scroll-view{
+  height: 800px;
+  
+}
+.card-row{
+  padding: 16rpx 36rpx 16rpx 16rpx;
+  background: white;
+  margin-bottom:5px;
+
+
+}
+.card-text{
+  color: #b6b6b6;
+  font-size: 12px;
+}
+.col-avatar{
+  width:74px!important;
+  height:74px !important;
+}

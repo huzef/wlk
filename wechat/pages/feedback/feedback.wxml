@@ -1,0 +1,16 @@
+  <view style='background:#999;font-size:12px;'>
+  <form catchsubmit="formSubmit" catchreset="formReset">
+  <i-panel>
+    <view class="textarea-wrp" style='margin:10px;'>
+      <textarea style="height: 160px;"  name="content"   placeholder='您的选择和信任是我们前进最大的动力！' maxlength="-1" />
+    </view>
+  </i-panel>
+  <i-panel  hide-border>
+<button  type='primary' formType="submit" style='margin:28rpx;12rpx'> 提 交 </button>
+</i-panel>
+
+  </form>
+  </view>
+
+
+  <i-toast id="toast" />

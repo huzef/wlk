@@ -1,22 +1,29 @@
+<view style='background:#3cc51f;'>
+<navigator class="location" url="../switchcity/switchcity" bindtap='setDetails'>
+      <i-icon type="coordinates_fill" size="20" />{{county?county:location}}</navigator>
+</view>
 <view class='search'>
-  <!-- <navigator class="location" url="../switchcity/switchcity">
-      <i-icon type="coordinates_fill" size="20" />{{county?county:location}}</navigator> -->
+
   <view class='searchItem'>
     <!-- <image src='/image/more/search.png' /> -->
-    <navigator class="location" url="../switchcity/switchcity">
-      <i-icon type="coordinates_fill" size="20" />{{county?county:location}}</navigator>
-    <i-icon type="search" size="20" />
-    <input placeholder='请输入律师'></input>
+    <!-- <navigator class="location" url="../switchcity/switchcity">
+      <i-icon type="coordinates_fill" size="20" />{{county?county:location}}</navigator> -->
+      <view>
+      
+      <!-- <i-icon type="search" size="20" /> -->
+      </view>
+    <image src='/image/more/search.png' /> 
+    <input placeholder='输入律师、擅长领域检索' value='{{law}}' bindinput="search1"></input>
   </view>
 </view>
 
 <!--搜索card-->
 <view class='scroll-conter'>
   <scroll-view scroll-y>
-    <view wx:for="{{lawList}}" bindtap="getDetails" data-id='{{item.name}}' wx:key="index">
+    <view wx:for="{{lawList}}" bindtap="getDetails" data-id='{{item.id}}' wx:key="index">
       <i-row i-class='card-row'>
         <i-col span="5" i-class="col-class">
-          <i-avatar i-class="col-avatar" src="https://i.loli.net/2017/08/21/599a521472424.jpg" size="large" shape="square"></i-avatar>
+          <i-avatar i-class="col-avatar" src="{{item.photoFilePath}}" size="large" shape="square"></i-avatar>
         </i-col>
         <i-col span="19" i-class="col-class">
           <i-row>
@@ -25,8 +32,8 @@
             </i-col>
             <i-col span="22" i-class="col-class">
               <scroll-view scroll-x style="white-space: nowrap;height:100%;">
-                {{item.name}}
-                <text class='card-text'>北京金诚同达（合肥）律师事务所</text>
+                {{item.firstName}}
+                <text class='card-text'>{{item.organization}}</text>
               </scroll-view>
             </i-col>
           </i-row>
@@ -36,7 +43,7 @@
             </i-col>
             <i-col span="22" i-class="col-class">
               <scroll-view scroll-x style="white-space: nowrap;height:100%;font-size:14px;line-height:25px;">
-                合肥庐阳区东怡金融广场B座婚姻家庭
+                {{item.address}}
               </scroll-view>
             </i-col>
           </i-row>
@@ -45,20 +52,26 @@
               <i-icon type="service" />
             </i-col>
             <i-col span="22" i-class="col-class">
-              <scroll-view scroll-x style="width: 100%;white-space: nowrap;height:100%;">
-                <i-tag color='green' style="margin-right:5px;">婚姻家庭</i-tag>
-                <i-tag color='green' style="margin-right:5px;"> 刑事辩护</i-tag>
-                <i-tag color='green' style="margin-right:5px;"> 知识产权</i-tag>
-                <i-tag color='green' style="margin-right:5px;"> 合同法</i-tag>
-                <i-tag color='green' style="margin-right:5px;"> 合同法</i-tag>
-                <i-tag color='green' style="margin-right:5px;"> 合同法</i-tag>
+              <scroll-view scroll-x style="width: 100%;white-space: nowrap;height:100%;font-size:14px;line-height:25px;">
+              {{item.field?item.field:""}}
+               <!-- <i-tag  wx:for='{{item.field}}' wx:key="index"  color='green' style="margin-right:5px;">{{item}}</i-tag> -->
+
               </scroll-view>
             </i-col>
           </i-row>
         </i-col>
       </i-row>
+      <i-spin size="large" fix wx:if="{{ spinShow }}"></i-spin>
     </view>
+    <view wx:if="{{void1}}" style='text-align: center;'>
+    <image src='/image/void.png' style='height:348px;width:100%;'></image>
+    <i-load-more   tip="没找到，要不换个姿势试试！" loading="{{ false }}" />
+    </view>
+    
+    <i-load-more  wx:if="{{more}}" tip="没有更多了" loading="{{ false }}" />
+    <i-load-more wx:if="{{loading}}" />    
   </scroll-view>
+  
 </view>
 
 <!-- <view class='search-heard'>
